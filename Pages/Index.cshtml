@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Вход";
+    <style>
+        * {
+            font-family: 'Trebuchet MS', Helvetica, sans-serif;
+        }
+    </style>
+}
+
+<h1>Вход</h1>
+<fieldset>
+    <div>
+        <input type="text" placeholder="логин">
+    </div>
+    <br>
+    <div>
+        <input type="text" placeholder="пароль">
+    </div>
+    <br>
+    <button onclick="checkUser()">Войти</button>
+</fieldset>
+
+
+<script>
+    function checkUser() {
+        alert('Вы нажали на кнопку!')
+    }
+</script>
