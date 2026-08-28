@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace webasp.Pages
 {
-    public class IndexModel : PageModel
+    public class registerModel : PageModel
     {
-        public IActionResult OnGet()
+        public void OnGet()
         {
-            return RedirectToPage("/login");
         }
     }
 }
