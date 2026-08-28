@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using webasp.Data;
+using webasp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<DB>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();
 
