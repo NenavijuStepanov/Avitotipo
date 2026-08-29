@@ -41,8 +41,14 @@ namespace webasp.Pages
             public string ConfirmPassword { get; set; } = string.Empty;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            return Page();
         }
 
 

@@ -1,9 +1,13 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using webasp.Data;
 using webasp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace webasp.Pages
 {
@@ -34,11 +38,60 @@ namespace webasp.Pages
 
         }
 
-
-
-
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            string username = Input.Username;
+            string password = Input.Password;
+
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == Input.Username);
+            if (user == null)
+            {
+                // Не показываем, ЧТО именно неверно (логин или пароль), из соображений безопасности
+                ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
+                return Page();
+            }
+
+            // 2. Проверяем соответствие введенного пароля с хэшем из БД
+            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, Input.Password);
+
+            if (result == PasswordVerificationResult.Failed)
+            {
+                ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
+                return Page();
+            }
+
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // 3. Записываем куку в браузер
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
+
+
+
+            return RedirectToPage("/Index");
         }
     }
 }
