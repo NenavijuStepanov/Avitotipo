@@ -4,8 +4,28 @@
     ViewData["Title"] = "Главная страница";
     }
 
+<div class="d-flex justify-content-between align-items-center w-100">
+    <span class="fs-3 fw-bold">Привет, @User.Identity.Name</span>
+    <form method="post" class="m-0">
+        <button type="submit" class="btn btn-primary">Удалить куки и выйти</button>
+    </form>
+</div>
 
-<h1>Привет</h1>
-<form method="post">
-<button type="submit" class="btn btn-primary">Удалить куки и выйти</button>
-</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+        </tr> 
+    </thead> 
+    <tbody> 
+        @foreach (var user in Model.UsersList) {
+    <tr> 
+        <td>@user.Id</td> 
+        <td>@user.Username</td> 
+    </tr>
+}
+</tbody> 
+</table>
+
