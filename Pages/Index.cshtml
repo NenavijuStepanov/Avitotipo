@@ -5,10 +5,10 @@
     }
 
 <div class="d-flex justify-content-between align-items-center w-100">
-    <span class="fs-3 fw-bold">Привет, @User.Identity.Name</span>
     <form method="post" class="m-0" asp-page-handler="LogOut">
-        <button type="submit" class="btn btn-primary">Удалить куки и выйти</button>
+        <button type="submit" class="btn btn-primary">Выйти</button>
     </form>
+    <a href="/Profile">Мой профиль</a>
 </div>
 
 
@@ -28,35 +28,7 @@
 }
 </tbody> 
 </table>
-<div class="d-flex align-items-center justify-content-center vh-100 bg-white">
-    <div class="p-5 bg-white rounded shadow" style="width: 400px;">
-<form method="post" class="m-0" asp-page-handler="Change">
 
-    <div asp-validation-summary="ModelOnly" class="text-danger mb-3 text-center"></div>
-
-    <div class="mb-3">
-        <label asp-for="Input.OldPassword" class="form-label">Введите старый пароль</label>
-        <input asp-for="Input.OldPassword" type="password" class="form-control" />
-        <span asp-validation-for="Input.OldPassword" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Input.Password" class="form-label">Введите новый пароль</label>
-        <input asp-for="Input.Password" type="password" class="form-control" />
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Input.ConfirmPassword" class="form-label">Повторите новый пароль</label>
-        <input asp-for="Input.ConfirmPassword" type="password" class="form-control" />
-        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-    </div>
-            <div class="text-center">
-                <button type="submit" class=" btn btn-primary">Войти</button>
-            </div>
-</form>
-</div>
-</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
