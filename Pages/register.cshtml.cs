@@ -43,10 +43,8 @@ namespace webasp.Pages
 
         public IActionResult OnGet()
         {
-            if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                return RedirectToPage("/Index");
-            }
+            if (User.Identity != null && User.Identity.IsAuthenticated) return RedirectToPage("/Index");
+            
 
             return Page();
         }
@@ -55,10 +53,8 @@ namespace webasp.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid) return Page();
+
 
             string username = Input.Username;
             string password = Input.Password;
@@ -90,7 +86,6 @@ namespace webasp.Pages
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            // 3. Записываем куку в браузер
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));

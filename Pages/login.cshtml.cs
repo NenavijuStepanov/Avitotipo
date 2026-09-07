@@ -50,10 +50,8 @@ namespace webasp.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid) return Page();
+
 
             string username = Input.Username;
             string password = Input.Password;

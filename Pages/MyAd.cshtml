@@ -1,0 +1,83 @@
+﻿@page
+@model MyadModel
+@{
+    ViewData["Title"] = "Главная страница";
+    }
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AdModal">
+    Новое объявление+
+</button>
+
+
+<div class="modal fade" id="AdModal" tabindex="-1" aria-labelledby="AdModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="AdModalLabel">Новое объявление</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="bootstrapAdForm" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label asp-for="Input.Title" class="form-label">Введите название</label>
+                        <input asp-for="Input.Title" class="form-control" />
+                        <span asp-validation-for="Input.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.Description" class="form-label">Введите описание</label>
+                        <input asp-for="Input.Description" class="form-control"/>
+                        <span asp-validation-for="Input.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Input.ImageFile" class="form-label">Фотография</label>
+                        <input asp-for="Input.ImageFile" type="file" class="form-control" accept="image/*" />
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 mt-2">Отправить данные</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@if (!Model.AdsList.Any())
+{
+    <div class="alert alert-info">Объявлений пока нет. Добавьте свое первое!</div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var ad in Model.AdsList)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    @if (!string.IsNullOrEmpty(ad.ImagePath))
+                    {
+                        <img src="@ad.ImagePath" class="card-img-top" alt="@ad.Title" style="height: 200px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center text-muted" style="height: 200px;">
+                            Нет фотографии
+                        </div>
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@ad.Title</h5>
+                        <p class="card-text text-secondary">@ad.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

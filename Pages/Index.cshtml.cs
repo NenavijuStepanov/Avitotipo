@@ -25,12 +25,22 @@ namespace webasp.Pages
 
         public List<User> UsersList { get; set; } = new();
 
-        public async Task<IActionResult> OnGet()
+
+        public List<Ad> AdsList { get; set; } = new();
+
+        public async Task<IActionResult> OnGetAsync()
         {
+            UsersList = await _db.Users.AsNoTracking().ToListAsync();
+
+
+            AdsList = await _db.Ads
+                .Include(a => a.User)
+                .AsNoTracking()
+                .OrderByDescending(a => a.Id) 
+                .ToListAsync();
             UsersList = await _db.Users.ToListAsync();
             return Page();
         }
-
 
 
 
