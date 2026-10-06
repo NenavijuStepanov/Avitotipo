@@ -10,16 +10,14 @@ using webasp.Models;
 
 namespace webasp.Pages
 {
-    [Authorize]
-    public class IndexModel : PageModel
+    public class SuperSecretPageOnlyForAdmin666Model : PageModel
     {
         private readonly DB _db;
 
-        public IndexModel(DB db)
+        public SuperSecretPageOnlyForAdmin666Model(DB db)
         {
             _db = db;
         }
-
         public List<Ad> AdsList { get; set; } = new();
 
         [BindProperty(SupportsGet = true)]
@@ -27,6 +25,12 @@ namespace webasp.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
+
+            if (User.Identity is null) return NotFound();
+
+            if (!(User.Identity.Name == "superpuperadmin666777")) return NotFound();
+
+
             var query = _db.Ads
                 .Include(a => a.User)
                 .AsNoTracking();
