@@ -3,28 +3,6 @@
 @{
     ViewData["Title"] = "Главная страница";
     }
-
-
-@*
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Имя</th>
-        </tr> 
-    </thead> 
-    <tbody> 
-        @foreach (var user in Model.UsersList) {
-    <tr> 
-        <td>@user.Id</td> 
-        <td>@user.Username</td> 
-    </tr>
-}
-</tbody> 
-</table>
-*@
-
-
 @if (!Model.AdsList.Any())
 {
     <div class="alert alert-info">Объявлений пока нет. Будьте первым, кто его добавит!</div>
