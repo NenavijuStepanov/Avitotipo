@@ -8,6 +8,7 @@ using webasp.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Строка подключения 'DefaultConnection' не найдена.");
@@ -46,6 +47,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.UseRouting();
 

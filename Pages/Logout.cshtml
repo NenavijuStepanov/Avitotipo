@@ -1,0 +1,28 @@
+﻿@page
+@model webasp.Pages.LogoutModel
+@{
+    ViewData["Title"] = "Выход из аккаунта";
+}
+
+<div class="row justify-content-center align-items-center mt-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm text-center">
+            <div class="card-body p-4">
+                <h4 class="card-title mb-3">Выход из системы</h4>
+                <p class="card-text text-secondary mb-4 fs-5">
+                    Вы действительно хотите выйти из аккаунта?
+                </p>
+
+                <form method="post" class="d-flex justify-content-center gap-3">
+                    <button type="submit" class="btn btn-danger px-4">
+                        Да, выйти
+                    </button>
+
+                    <a asp-page="/Index" class="btn btn-secondary px-4">
+                        Нет
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
