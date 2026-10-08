@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace webasp.Models
 {
 
-    public class Ad
+    public class Ad   // класс для объявлений при взаимодействии с сервером
     {
         public int Id { get; set; }
 

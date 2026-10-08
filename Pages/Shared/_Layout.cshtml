@@ -1,17 +1,17 @@
 ﻿<!DOCTYPE html>
-<html lang="ru">
+<html lang="ru">              <!-- Этот файл надевается на все хтмлки, если ничего не прописано про Layout в начале их же-->
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />     <!-- импорт стилей бутстрапа -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />    
     <link rel="stylesheet" href="~/webasp.styles.css" asp-append-version="true" />
     <link rel="icon" type="image/jpeg" href="~/am.jpg" />
 </head>
 <body>
-    <header>
+    <header>   <!-- все, что ниже будет до мэин - это поисковая панель -->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand fw-bold text-primary" asp-area="" asp-page="/Index">
@@ -54,11 +54,11 @@
         </nav>
     </header>
     <main>
-    @RenderBody()
+        @RenderBody()  <!-- вот тут сам контент хтмлки -->
     </main>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>     <!-- импорт скриптов бутстрапа -->
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

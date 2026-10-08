@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace webasp.Models
 {
-    [Index(nameof(Username), IsUnique = true)]
-    public class User
+    [Index(nameof(Username), IsUnique = true)] // проверка на уникальность юза
+    public class User // класс для пользователей при взаимодействии с сервером
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required] 
         [StringLength(50)]
         public string Username { get; set; } = string.Empty;
 
